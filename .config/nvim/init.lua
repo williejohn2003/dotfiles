@@ -1,14 +1,14 @@
 vim.g.syntax="off"
 
 vim.g.errorbells=false
-vim.g.tabstop=4 
-vim.g.softtabstop=4
-vim.g.shiftwidth=4
+vim.opt.tabstop=4 
+vim.opt.softtabstop=4
+vim.opt.shiftwidth=4
 vim.opt.expandtab=true
 vim.opt.smartindent=true
 -- set rnu
 vim.opt.nu=true
-vim.g.nowrap=true
+vim.opt.wrap=false
 vim.opt.smartcase=true
 vim.opt.swapfile=false
 vim.g.backup=false
