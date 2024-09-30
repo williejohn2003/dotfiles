@@ -15,8 +15,7 @@
 #.config/awesome/README.rst
 #!.config/awesome
 #!.config/awesome/
-.config/awesome/**
-!.config/awesome
+!.config/awesome/
 !.config/awesome/rc.lua
 .config/GIMP
 .config/nvim/pack
