@@ -2,6 +2,10 @@
 !.gitignore
 !.config
 !.config/**
+#awesome files ignore
+#.config/awesome/*
+!.config/awesome/
+!.config/awesome/rc.lua
 #.config/awesome/.git
 #.config/awesome/.gitignore
 #.config/awesome/.gitmodules
@@ -13,11 +17,6 @@
 #.config/awesome/ISSUE_TEMPLATE.md
 #.config/awesome/m_rc.lua
 #.config/awesome/README.rst
-#!.config/awesome
-#!.config/awesome/
-.config/awesome/**
-!.config/awesome
-!.config/awesome/rc.lua
 .config/GIMP
 .config/nvim/pack
 .config/nvim/plugged
