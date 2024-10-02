@@ -19,7 +19,7 @@ vim.opt.encoding="utf-8"
 vim.opt.backspace="indent,eol,start"
 vim.opt.mouse="a"
 vim.g.colorcolumn=80
-vim.opt.foldmethod="indent"
+--vim.opt.foldmethod="indent"
 
 vim.g.highlight="ColorColumn" 
 vim.g.ctermbg=0 
