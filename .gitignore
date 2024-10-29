@@ -28,6 +28,7 @@
 .config/pulse
 .config/coc/**
 .config/evolution
+.config/libreoffice
 !.zshrc
 !.bashrc
 !README.md

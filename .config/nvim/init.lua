@@ -18,11 +18,30 @@ vim.opt.incsearch= true
 vim.opt.encoding="utf-8"
 vim.opt.backspace="indent,eol,start"
 vim.opt.mouse="a"
-vim.g.colorcolumn=80
-vim.opt.foldmethod="indent"
+vim.opt.mouse="a"
+vim.opt.colorcolumn="80"
+--vim.opt.foldmethod="indent"
 
-vim.g.highlight="ColorColumn" 
-vim.g.ctermbg=0 
+-- Ensure .txt files are correctly detected
+--vim.api.nvim_create_autocmd("BufRead,BufNewFile", {
+--  pattern = "*.txt",
+--  command = "setlocal filetype=txt"
+--})
+
+-- Automatically enable word wrapping and set textwidth for .txt files
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "*.txt",
+  callback = function()
+    -- Enable word wrapping for .txt files
+    vim.opt_local.wrap = true
+    -- Enable linebreak to prevent breaking words in the middle
+    vim.opt_local.linebreak = true
+    -- Set textwidth to 80 (for hard wrapping)
+    vim.opt_local.textwidth = 80
+  end,
+})
+
+vim.g.ctermbg=0
 vim.g.guibg="lightgrey"
 
 local Plug = vim.fn['plug#']
@@ -69,6 +88,7 @@ Plug 'gosukiwi/vim-atom-dark'
 Plug 'rakr/vim-one'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug ('nvim-treesitter/nvim-treesitter', {['do']= ':TSUpdate'})
+Plug 'slugbyte/lackluster.nvim'
 
 --orgmode plugin
 --Plug 'nvim-orgmode/orgmode'
@@ -81,7 +101,7 @@ Plug 'folke/zen-mode.nvim'
 vim.call("plug#end")
 
 --color scheme
-vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme lackluster')
 vim.opt.background = 'dark'
 
 if vim.fn.executable('rg') == 1 then
