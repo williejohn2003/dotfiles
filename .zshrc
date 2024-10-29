@@ -103,7 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 #editor
-export PATH=$PATH:/home/john/apps/nvim-linux64/bin
+export PATH=$PATH:/home/john/apps/nvim-linux64/bin #nvim 
+export PATH=$PATH:/home/john/.local/bin #python lsp server
 export VISUAL=nvim
 export EDITOR=nvim
 # Example aliases
