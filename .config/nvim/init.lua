@@ -18,7 +18,6 @@ vim.opt.incsearch= true
 vim.opt.encoding="utf-8"
 vim.opt.backspace="indent,eol,start"
 vim.opt.mouse="a"
-vim.opt.mouse="a"
 vim.opt.colorcolumn="80"
 --vim.opt.foldmethod="indent"
 
@@ -41,7 +40,6 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   end,
 })
 
-vim.g.colorcolumn=80
 --vim.opt.foldmethod="indent"
 
 vim.g.ctermbg=0
