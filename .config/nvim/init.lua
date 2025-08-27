@@ -1,9 +1,9 @@
-vim.g.syntax="off"
+vim.opt.syntax="off"
 
-vim.g.errorbells=false
-vim.opt.tabstop=4 
-vim.opt.softtabstop=4
-vim.opt.shiftwidth=4
+vim.opt.errorbells=false
+vim.opt.tabstop=2
+vim.opt.softtabstop=2
+vim.opt.shiftwidth=2
 vim.opt.expandtab=true
 vim.opt.smartindent=true
 -- set rnu
@@ -11,9 +11,9 @@ vim.opt.nu=true
 vim.opt.wrap=false
 vim.opt.smartcase=true
 vim.opt.swapfile=false
-vim.g.backup=false
-vim.g.undodir="~/.config/nvim/undodir"
-vim.g.undofile=true
+vim.opt.backup=false
+vim.opt.undodir="home/john/.config/nvim/undodir"
+vim.opt.undofile=true
 vim.opt.incsearch= true
 vim.opt.encoding="utf-8"
 vim.opt.backspace="indent,eol,start"
@@ -63,7 +63,7 @@ Plug 'saadparwaiz1/cmp_luasnip' -- Snippet completion
 Plug 'L3MON4D3/LuaSnip' -- Snippet engine
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
-Plug 'lyuts/vim-rtags'
+--Plug 'lyuts/vim-rtags'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdtree'
@@ -188,6 +188,9 @@ vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap 
 -- Show function signature
 vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
 
+-- cursor navigation
+vim.keymap.set('n', '<leader>o', '<C-o>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>i', '<C-i>', { noremap = true, silent = true })
 
 
 --let g:coc_config_home = '/home/john/.config/coc/'
