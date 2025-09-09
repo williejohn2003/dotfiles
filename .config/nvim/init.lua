@@ -102,7 +102,12 @@ Plug 'folke/zen-mode.nvim'
 vim.call("plug#end")
 
 --color scheme
-vim.cmd('colorscheme lackluster')
+if vim.wo.diff then
+--vim.cmd.colorscheme("traffic_lights_diff")
+  vim.cmd.colorscheme("1989")
+else
+  vim.cmd('colorscheme lackluster')
+end
 vim.opt.background = 'dark'
 
 if vim.fn.executable('rg') == 1 then
