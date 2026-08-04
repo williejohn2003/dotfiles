@@ -168,7 +168,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- neovim lsp
-require'lspconfig'.pylsp.setup{}
+--require'lspconfig'.pylsp.setup{}
+vim.lsp.enable('pyright')
+vim.lsp.enable('clangd')
 
 -- Setup nvim-cmp
 local cmp = require'cmp'
@@ -198,13 +200,13 @@ cmp.setup({
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['pyright'].setup {
-  capabilities = capabilities,
-}
-require('lspconfig')['clangd'].setup {
-  capabilities = capabilities,
-}
+--local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+--require('lspconfig')['pyright'].setup {
+--  capabilities = capabilities,
+--}
+--require('lspconfig')['clangd'].setup {
+--  capabilities = capabilities,
+--}
 --require'lspconfig'.pyright.setup{}
 --require'lspconfig'.clangd.setup{}
 
@@ -438,7 +440,7 @@ require("zen-mode").setup {
   end,
     }
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter').setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
     ensure_installed = { "c", "lua", "vim", "query", "python", "asm" },
 
