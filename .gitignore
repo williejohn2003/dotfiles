@@ -5,6 +5,7 @@
 !.bashrc
 !.config
 .config/*
+!.config/update_nvim.sh
 !.config/nvim/
 .config/nvim/*
 !.config/nvim/init.lua

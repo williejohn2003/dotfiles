@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 #editor
-export PATH=$PATH:/home/john/apps/nvim-linux64/bin #nvim 
+#export PATH=$PATH:/home/john/apps/neovim/build/bin #nvim 
 export PATH=$PATH:/home/john/.local/bin #python lsp server
 export VISUAL=nvim
 export EDITOR=nvim
@@ -115,12 +115,27 @@ alias practice="cd /home/john/repository/Practice/"
 alias top100="cd /home/john/repository/Practice/C/Mastery/top100/"
 alias repo="cd /home/john/repository"
 alias react="cd /home/john/repository/Practice/C/React/tutorial/my-app/"
-alias home="cd /home/john/"
+#alias home="cd /home/john/"
 alias setup="/home/john/.config/setup.sh"
 alias zrc="vim /home/john/.zshrc"
+alias szrc="source /home/john/.zshrc"
 alias vrc="vim /home/john/.config/nvim/init.lua"
 alias tut="google-chrome https://legacy.reactjs.org/tutorial/tutorial.html"
 alias structures="vim /home/john/repository/Practice/C/Mastery/structures.c"
+#TODO: create a notes file
+#alias notes
+alias ohmyzsh="vim ~/.oh-my-zsh"
+
+alias ll="ls -alF"
+alias la="ls -A"
+alias  l="ls -CF"
+alias tag="ctags --sort=yes -R ."
+
+#run script shortcut - function style
+#run()
+#{
+# "./script" "$@"
+#}
 
 neofetch
 
