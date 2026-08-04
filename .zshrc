@@ -125,6 +125,7 @@ alias structures="vim /home/john/repository/Practice/C/Mastery/structures.c"
 #TODO: create a notes file
 #alias notes
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias updatenvim="/home/john/.config/update_nvim.sh"
 
 alias ll="ls -alF"
 alias la="ls -A"
