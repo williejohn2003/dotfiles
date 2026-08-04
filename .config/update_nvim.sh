@@ -12,27 +12,32 @@
 # - add an alias to call the update from any directory in the terminal
 #
 
-
 NVIM_PATH="$HOME/apps/neovim/"
 RUN_TIME_="/usr/local/share/nvim/"
 NVIM_APP="/usr/local/bin/nvim/"
 
-printf "installing clean version of latest stable NVIM..\n"
-cd "$NVIM_PATH"
-
-# pull the lastest from stable branch
-git checkout stable
-git pull
+# script has to run as root to install
+# this will call sudo if the user doesn't
+if [ "$(id -u)" -ne 0 ]; then
+  exec sudo "$0" "$@"
+fi
 
 # remove all previous nvim files and executable for a clean install
 make distclean
 rm -rf "$RUN_TIME"
 rm -rf "$NVIM_APP"
 
+#printf "installing clean version of latest stable NVIM..\n"
+cd "$NVIM_PATH"
+
+# pull the lastest from stable branch
+git checkout stable
+git pull
+
 # build release version of latest stable branch
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 
 # install nvim on the system
-sudo make install
+make install
 printf "NVIM install complete..\n"
 

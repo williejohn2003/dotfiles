@@ -167,11 +167,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- neovim lsp
---require'lspconfig'.pylsp.setup{}
-vim.lsp.enable('pyright')
-vim.lsp.enable('clangd')
-
 -- Setup nvim-cmp
 local cmp = require'cmp'
 
@@ -199,7 +194,11 @@ cmp.setup({
   })
 })
 
--- Setup lspconfig.
+--------------------------------------------------
+-- the lines below are deprecated after neovim v11
+--------------------------------------------------
+-- the lines below are deprecated after neovim v11
+-- Setup neovim lspconfig.
 --local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 --require('lspconfig')['pyright'].setup {
 --  capabilities = capabilities,
@@ -209,6 +208,12 @@ cmp.setup({
 --}
 --require'lspconfig'.pyright.setup{}
 --require'lspconfig'.clangd.setup{}
+
+-- neovim enable lsp
+vim.lsp.enable('pyright')
+vim.lsp.enable('clangd')
+vim.lsp.enable('bash')
+vim.lsp.enable('Makefile')
 
 -- Jump to definition
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
