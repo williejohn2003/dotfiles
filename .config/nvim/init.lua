@@ -99,14 +99,19 @@ Plug 'folke/twilight.nvim'
 
 --Zen Mode
 Plug 'folke/zen-mode.nvim'
+
+-- todo comments
+Plug 'folke/todo-comments.nvim'
 vim.call("plug#end")
+--end of plug
 
 --color scheme
 if vim.wo.diff then
 --vim.cmd.colorscheme("traffic_lights_diff")
-  vim.cmd.colorscheme("1989")
+  vim.cmd.colorscheme("znake")
 else
-  vim.cmd('colorscheme lackluster')
+  vim.cmd('colorscheme lackluster-mint')
+  vim.cmd('colorscheme bvemu')
 end
 vim.opt.background = 'dark'
 
@@ -122,6 +127,34 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 vim.g.ctrlp_use_caching = 0
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- space to tabs for Makefile
+
+--toggle colorscheme
+local current = "bvemu"
+vim.keymap.set("n", "<leader>c", function()
+  if current ==  "bvemu" then
+    current = "lackluster-mint"
+  elseif current == "lackluster-mint" then
+    current = "znake"
+  else
+    current = "bvemu"
+  end
+  vim.cmd.colorscheme(current)
+end, {desc = "toggle colorscheme"})
+
+-- open notes file
+vim.keymap.set("n", "<leader>n", function()
+  vim.cmd.vsplit(vim.fn.expand("~/notes.txt"))
+  vim.cmd("vertical resize 70")
+end, {desc = "open notes"})
+
+-- todo comments
+require('todo-comments').setup{
+  options = {}
+}
 
 -- save cursor placement
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -230,6 +263,7 @@ vim.api.nvim_set_keymap('n', 'ff', '<cmd>Telescope find_files<CR>', { noremap = 
 vim.api.nvim_set_keymap('n', 'fg', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fb', '<cmd>Telescope file_browser<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fh', '<cmd>Telescope help_tags<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'fc', '<cmd>Telescope colorscheme enable_preview=true previewer=true<CR>', { noremap = true, silent = true })
 --noremap <leader>ff <cmd>Telescope find_files<cr>
 --noremap <leader>fg <cmd>Telescope live_grep<cr>
 --noremap <leader>fb <cmd>Telescope file_browser<cr>
@@ -239,10 +273,32 @@ vim.api.nvim_set_keymap('n', 'fh', '<cmd>Telescope help_tags<CR>', { noremap = t
 --autocmd StdinReadPre * let s:std_in=1
 --autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
+
+-- open file browser instead of netrw
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local arg = vim.fn.argv(0)
+    if arg ~= "" and vim.fn.isdirectory(arg) == 1 then
+      -- close the empty buffer than opens by default
+      vim.cmd("bd!")
+      -- launch Telescope file browser (instead of netrw)
+      require("telescope").extensions.file_browser.file_browser({
+        path = arg,
+        cwd = arg,
+        respect_gitignore = true,
+        hidden = true,
+        grouped = true,
+        initial_mode = "normal",
+        layout_config = { height = 20, width = 120}
+      })
+    end
+  end
+})
+
 ---------------------------------------------------------------
 --NerdTree shortcuts
 --"-------------------------------------------------------------
-vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-n>', ':NERDTree<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true, silent = true })
