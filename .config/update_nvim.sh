@@ -18,7 +18,8 @@ NVIM_APP="/usr/local/bin/nvim/"
 
 # exit on any error
 set -e
-set -x
+# print lines
+#set -x
 
 # script has to run as root to install
 # this will call sudo if the user doesn't
@@ -26,23 +27,47 @@ set -x
 #  exec sudo "$0" "$@"
 #fi
 
-cd "$NVIM_PATH"
+# ask user if they want to continue or abort install
+read -rp "initiate clean build and install of latest release of NeoVIM (Y/N): " ANS;
 
-# remove all previous nvim files and executable for a clean install
-make distclean
-echo "$RUN_TIME_NVIM"
-sudo rm -rf "$RUN_TIME_NVIM"
-sudo rm -rf "$NVIM_APP"
+# continue or abort install
+case "$ANS" in
+  [Yy])
+    printf "continuing install..\n";
+    ;;
+  *)
+    printf "aborting install..\n";
+    exit 1
+    ;;
+esac
 
-# pull the lastest from stable branch
-git checkout master
-git pull
-git checkout "$(git describe --tags "$(git rev-list --tags --max-count=1)")"
+## change directory to neovim repo
+#cd "$NVIM_PATH"
+#
+## remove all previous nvim files and executable for a clean install
+#make distclean
+#echo "$RUN_TIME_NVIM"
+#sudo rm -rf "$RUN_TIME_NVIM"
+#sudo rm -rf "$NVIM_APP"
+#
+## pull the lastest from stable branch
+#git checkout master
+#git pull
+#git checkout "$(git describe --tags "$(git rev-list --tags --max-count=1)")"
+#
+## build release version of latest stable branch
+#make CMAKE_BUILD_TYPE=RelWithDebInfo
+#
+## installing clean version of latest stable NVIM
+#sudo make install
 
-# build release version of latest stable branch
-make CMAKE_BUILD_TYPE=RelWithDebInfo
+# print install completion message and neovim version
+printf "\n";
+printf "\n";
+printf "====================================================================\n";
+printf "NVIM install complete!\n";
+nvim --version
+printf "====================================================================\n";
 
-#printf "installing clean version of latest stable NVIM..\n"
-sudo make install
-printf "NVIM install complete..\n"
+exit 0
 
