@@ -12,7 +12,7 @@ vim.opt.wrap=false
 vim.opt.smartcase=true
 vim.opt.swapfile=false
 vim.opt.backup=false
-vim.opt.undodir="home/john/.config/nvim/undodir"
+vim.opt.undodir="$HOME/.config/nvim/undodir"
 vim.opt.undofile=true
 vim.opt.incsearch= true
 vim.opt.encoding="utf-8"
@@ -238,7 +238,7 @@ vim.keymap.set('n', '<leader>o', '<C-o>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>i', '<C-i>', { noremap = true, silent = true })
 
 
---let g:coc_config_home = '/home/john/.config/coc/'
+--let g:coc_config_home = '$HOME/.config/coc/'
 --
 --"-------------------------------------------------------------
 --"COC Commands
