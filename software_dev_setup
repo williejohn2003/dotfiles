@@ -6,55 +6,45 @@ apps_dir="$HOME/apps"
 neovim_repo="$HOME/apps/neovim"
 ranger_dir="$HOME/.config/ranger"
 
-# TODO: handle errors manually
 # TODO: update names for wget
-# TODO: add options for setup
 # catch all errors
 set -e
 
 
+###############################################################################
+#                                PACKAGES
+###############################################################################
+
 # install prerequisites
 install_prereqs()
 {
-	printf "installing prerequisite packages...\n";
+  printf "installing prerequisite packages...\n";
 
-	printf "creating apps directory...\n";
-	mkdir -p "$apps_dir";
+  printf "creating apps directory...\n";
+  mkdir -p "$apps_dir";
 
-	printf "updating package manager...\n";
-	sudo apt -y update;
+  printf "updating package manager...\n";
+  sudo apt -y update;
 
-	printf "installing packages...\n";
-	sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
+  printf "installing packages...\n";
+  sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
 
-	printf "\nPrerequisites install complete!\n";
+  printf "\nPrerequisites install complete!\n";
 }
 
 
-# get ranger config file
-install_ranger_config()
-{
-	# make nvim folder
-  if [[ ! -e "$ranger_dir" ]]; then
-    printf "creating ranger directory...\n";
-    mkdir -p "$ranger_dir";
-  fi
-
-  ranger --copy-config=all
-  wget -O "$ranger_dir"/rc.conf https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/ranger/rc.conf;
-
-	printf "\nranger config install complete!\n";
-}
-
+###############################################################################
+#                                TOOLS
+###############################################################################
 
 # install zsh and ohmyzsh
 install_zsh()
 {
-	(
-	printf "installing Zsh..\n";
-	sudo apt -y install zsh;
-	which zsh;
-	)
+  (
+    printf "installing Zsh..\n";
+    sudo apt -y install zsh;
+    which zsh;
+  )
 
   if command -v zsh &>/dev/null; then
     printf "installing ohmyzsh...\n";
@@ -66,50 +56,23 @@ install_zsh()
     #printf "making Zsh the default shell...\n";
     #chsh -s $(which zsh);
 
-	else
-		printf "Zsh install failed!\n";
-		exit 1;
+  else
+    printf "Zsh install failed!\n";
+    exit 1;
 
-	fi
-}
-
-
-# install Zsh config
-install_zsh_config()
-{
-	printf "installing zshrc...\n";
-	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
-
-	printf "\n.zshrc install complete!\n";
+  fi
 }
 
 
 # install plug.vim
 install_plug()
 {
-	printf "installing vim.plug...\n";
-	curl -fLo "${XDG_DATA_HOME:-$HOME/.config}/nvim/autoload/plug.vim" \
-		--create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
+  printf "installing vim.plug...\n";
+  curl -fLo "${XDG_DATA_HOME:-$HOME/.config}/nvim/autoload/plug.vim" \
+    --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
 
-	printf "\nplug install complete!\n";
-}
-
-
-# install nvim config
-install_nvim_config()
-{
-	# make nvim folder
-  if [[ ! -e "$nvim_dir" ]]; then
-    printf "creating nvim directory...\n";
-    mkdir -p "$nvim_dir";
-  fi
-
-	# get nvim config file
-	printf "getting nvim.init...\n";
-	wget -O "$nvim_dir"/init.lua https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/nvim/init.lua;
-
-	printf "\nnvim.init install complete!\n";
+  printf "\nplug install complete!\n";
 }
 
 
@@ -122,22 +85,22 @@ install_nvim()
     mkdir -p "$apps_dir";
   fi
 
-	# if repo exists, remove for clean clone
-	if [[ -e "$neovim_repo" ]]; then
+  # if repo exists, remove for clean clone
+  if [[ -e "$neovim_repo" ]]; then
     printf "removing old nvim repo...\n";
-		rm -rf "$neovim_repo";
-	fi
-	printf "getting nvim repo...\n";
-	git clone https://github.com/neovim/neovim.git "$neovim_repo";
+    rm -rf "$neovim_repo";
+  fi
+  printf "getting nvim repo...\n";
+  git clone https://github.com/neovim/neovim.git "$neovim_repo";
 
-	
-	printf "installing nvim...\n";
-	(
-	wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
-	bash "$config_dir"/update_nvim.sh "$1";
-	)
 
-	printf "installing nvim plug packages...\n";
+  printf "installing nvim...\n";
+  (
+    wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
+    bash "$config_dir"/update_nvim.sh "$1";
+  )
+
+  printf "installing nvim plug packages...\n";
   nvim +'PlugInstall' -c 'qall'
 }
 
@@ -145,32 +108,83 @@ install_nvim()
 # full install
 install_all()
 {
-	install_prereqs;
-	install_ranger_config;
-	install_nvim_config;
-	install_zsh;
-	install_zsh_config;
-	install_plug;
-	install_nvim y;
+  install_prereqs;
+  install_ranger_config;
+  install_nvim_config;
+  install_zsh;
+  install_zsh_config;
+  install_plug;
+  install_nvim y;
 
-	printf "\nfull install complete!\n";
-	printf "\nclose and repoen a new terminal.\n\n";
+  printf "\nfull install complete!\n";
+  printf "\nclose and repoen a new terminal.\n\n";
 }
 
+
+###############################################################################
+#                                CONFIG FILES
+###############################################################################
+
+# get ranger config file
+install_ranger_config()
+{
+  # make nvim folder
+  if [[ ! -e "$ranger_dir" ]]; then
+    printf "creating ranger directory...\n";
+    mkdir -p "$ranger_dir";
+  fi
+
+  ranger --copy-config=all
+  wget -O "$ranger_dir"/rc.conf https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/ranger/rc.conf;
+
+  printf "\nranger config install complete!\n";
+}
+
+
+# install Zsh config
+install_zsh_config()
+{
+  printf "installing zshrc...\n";
+  wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
+
+  printf "\n.zshrc install complete!\n";
+}
+
+
+# install nvim config
+install_nvim_config()
+{
+  # make nvim folder
+  if [[ ! -e "$nvim_dir" ]]; then
+    printf "creating nvim directory...\n";
+    mkdir -p "$nvim_dir";
+  fi
+
+  # get nvim config file
+  printf "getting nvim.init...\n";
+  wget -O "$nvim_dir"/init.lua https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/nvim/init.lua;
+
+  printf "\nnvim.init install complete!\n";
+}
+
+
+###############################################################################
+#                                MAIN PROCESS
+###############################################################################
 
 # main process
 main()
 {
   printf "\nSoftware Development Setup Script\n\n"
 
-	printf "0 - Install ALL\n"
+  printf "0 - Install ALL\n"
   printf "1 - Install Prerequisites\n"
   printf "2 - Install Zsh\n"
   printf "3 - Install NVIM\n"
   printf "4 - Install NVIM Config\n"
   printf "5 - Install Ranger Config\n"
   printf "6 - Install Zsh Config\n"
-	printf "7 - Install Plug.vim\n\n"
+  printf "7 - Install Plug.vim\n\n"
 
   printf "q - exit\n\n"
 
@@ -178,7 +192,7 @@ main()
 
   printf "\n";
   case "$ANS" in
- 		0|"") install_all;
+    0|"") install_all;
       ;;
     1) install_prereqs;
       ;;
