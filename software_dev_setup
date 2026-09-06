@@ -28,12 +28,12 @@ install_prereqs()
 	sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
 }
 
+# get ranger config file
 ranger_config()
 {
   ranger --copy-config=all
-  wget -O "$ranger_dir"/rc.conf ;
+  wget -O "$ranger_dir"/rc.conf https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/ranger/rc.conf;
 }
-
 
 # install zsh and ohmyzsh
 install_zsh()
