@@ -77,7 +77,7 @@ install_zsh()
 # install Zsh config
 install_zsh_config()
 {
-	printf "getting zshrc...\n";
+	printf "installing zshrc...\n";
 	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
 
 	printf "\n.zshrc install complete!\n";
@@ -163,7 +163,7 @@ main()
 {
   printf "\nSoftware Development Setup Script\n\n"
 
-	printf "0 - Install ALL\n\n"
+	printf "0 - Install ALL\n"
   printf "1 - Install Prerequisites\n"
   printf "2 - Install Zsh\n"
   printf "3 - Install NVIM\n"
