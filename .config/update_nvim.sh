@@ -27,11 +27,12 @@ set -e
 #  exec sudo "$0" "$@"
 #fi
 
-# ask user if they want to continue or abort install
+# dont ask user if y/Y is provided when script is called
 case $1 in
 [Yy])
 : ;;
 *)
+  # ask user if they want to continue or abort install
   read -rp "initiate clean build and install of latest release of NeoVIM (Y/N): " ANS;
 
   # continue or abort install
