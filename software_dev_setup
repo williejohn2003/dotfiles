@@ -60,9 +60,6 @@ install_zsh()
     printf "installing ohmyzsh...\n";
     yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
 
-	printf "getting zshrc...\n";
-	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
-
     printf "\nZsh install complete!\n";
 
     #zsh prompts for default shell during installation
@@ -74,6 +71,16 @@ install_zsh()
 		exit 1;
 
 	fi
+}
+
+
+# install Zsh config
+install_zsh_config()
+{
+	printf "getting zshrc...\n";
+	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
+
+	printf "\n.zshrc install complete!\n";
 }
 
 
@@ -89,7 +96,7 @@ install_plug()
 }
 
 
-# install config files
+# install nvim config
 install_nvim_config()
 {
 	# make nvim folder
@@ -142,6 +149,7 @@ install_all()
 	install_ranger_config;
 	install_nvim_config;
 	install_zsh;
+	install_zsh_config;
 	install_plug;
 	install_nvim y;
 
@@ -155,13 +163,14 @@ main()
 {
   printf "\nSoftware Development Setup Script\n\n"
 
+	printf "0 - Install ALL\n\n"
   printf "1 - Install Prerequisites\n"
   printf "2 - Install Zsh\n"
   printf "3 - Install NVIM\n"
   printf "4 - Install NVIM Config\n"
   printf "5 - Install Ranger Config\n"
-  printf "6 - Install Plug.vim\n"
-  printf "7 - Install ALL\n\n"
+  printf "6 - Install Zsh Config\n"
+	printf "7 - Install Plug.vim\n\n"
 
   printf "q - exit\n\n"
 
@@ -169,6 +178,8 @@ main()
 
   printf "\n";
   case "$ANS" in
+ 		0|"") install_all;
+      ;;
     1) install_prereqs;
       ;;
     2) install_zsh;
@@ -179,9 +190,9 @@ main()
       ;;
     5) install_ranger_config;
       ;;
-    6) install_plug;
+    6) install_zsh_config;
       ;;
-    7) install_all;
+    7) install_plug;
       ;;
     [Qq]) printf "aborting setup script!\n"; exit 0;
       ;;
