@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+
+config_dir="$HOME/.config"
+nvim_dir="$HOME/.config/nvim"
+apps_dir="$HOME/apps"
+neovim_repo="$HOME/apps/neovim"
+
+# TODO: handle errors manually
+# TODO: get ranger config files
+# TODO: update names for wget
+# TODO: add options for setup
+# catch all errors
+set -e
+
+
+# install prerequisites
+install_prereqs()
+{
+	printf "creating apps directory...\n";
+	mkdir -p "$apps_dir";
+
+	printf "updating package manager...\n";
+	sudo apt -y update;
+
+# https://github.com/rizsotto/Bear
+	printf "installing prerequisites...\n";
+	sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
+}
+
+
+# install zsh and ohmyzsh
+install_zsh()
+{
+	(
+	printf "installing Zsh..\n";
+	sudo apt -y install zsh;
+	which zsh;
+	)
+
+	printf "getting zshrc...\n";
+	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
+
+	if command -v zsh &>/dev/null; then
+		printf "installing ohmyzsh...\n";
+		sh -c "$(curl -fsSLo https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+
+		#zsh prompts for default shell during installation
+		#printf "making Zsh the default shell...\n";
+		#chsh -s $(which zsh);
+
+	else
+		printf "Zsh install failed!\n";
+		exit 1;
+
+	fi
+}
+
+
+# install plug.vim
+install_plug()
+{
+	printf "installing vim.plug...\n";
+	curl -fLo "${XDG_DATA_HOME:-$HOME/.config}/nvim/autoload/plug.vim" \
+		--create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
+}
+
+
+# install config files
+install_config_files()
+{
+	# make nvim folder
+	printf "creating nvim directory...\n";
+	mkdir -p "$nvim_dir";
+
+	# get nvim config file
+	printf "getting nvim.init...\n";
+	wget -O "$nvim_dir"/init.lua https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/nvim/init.lua;
+}
+
+
+# install nvim
+install_nvim()
+{
+	# ensure apps directory exists
+	mkdir -p "$apps_dir";
+
+	# if repo exists, remove for clean clone
+	if [[ -e "$neovim_repo" ]]; then
+    printf "removing old nvim repo...\n";
+		rm -rf "$neovim_repo";
+	fi
+	printf "getting nvim repo...\n";
+	git clone https://github.com/neovim/neovim.git "$neovim_repo";
+
+	
+	printf "installing nvim...\n";
+	(
+	wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
+	bash "$config_dir"/update_nvim.sh;
+	)
+
+	printf "installing nvim plug packages...\n";
+  nvim +'PlugInstall' -c 'qall'
+}
+
+
+# main process
+main()
+{
+	install_prereqs;
+	install_config_files;
+	install_zsh;
+	install_plug;
+	install_nvim;
+
+	printf "install complete!\n";
+	printf "close and repoen a new terminal.\n";
+}
+
+
+main;
+
+
+exit 0;
+

@@ -4,6 +4,7 @@
 !.zshrc
 !.bashrc
 !.config
+!software_dev_setup
 .config/*
 !.config/update_nvim.sh
 !.config/nvim/
