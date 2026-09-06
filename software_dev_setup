@@ -127,7 +127,7 @@ install_nvim()
 	printf "installing nvim...\n";
 	(
 	wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
-	bash "$config_dir"/update_nvim.sh $1;
+	bash "$config_dir"/update_nvim.sh "$1";
 	)
 
 	printf "installing nvim plug packages...\n";
