@@ -139,11 +139,11 @@ install_nvim()
 install_all()
 {
 	install_prereqs;
-  install_ranger_config;
+	install_ranger_config;
 	install_nvim_config;
 	install_zsh;
 	install_plug;
-	install_nvim;
+	install_nvim y;
 
 	printf "\nfull install complete!\n";
 	printf "\nclose and repoen a new terminal.\n\n";
@@ -173,7 +173,7 @@ main()
       ;;
     2) install_zsh;
       ;;
-    3) y install_nvim;
+    3) install_nvim;
       ;;
     4) install_nvim_config;
       ;;
