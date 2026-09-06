@@ -103,29 +103,29 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 #editor
-#export PATH=$PATH:/home/john/apps/neovim/build/bin #nvim 
-export PATH=$PATH:/home/john/.local/bin #python lsp server
+#export PATH=$PATH:$HOME/apps/neovim/build/bin #nvim 
+export PATH=$PATH:$HOME/.local/bin #python lsp server
 export VISUAL=nvim
 export EDITOR=nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
-alias practice="cd /home/john/repository/Practice/"
-alias top100="cd /home/john/repository/Practice/C/Mastery/top100/"
-alias repo="cd /home/john/repository"
-alias react="cd /home/john/repository/Practice/C/React/tutorial/my-app/"
-#alias home="cd /home/john/"
-alias setup="/home/john/.config/setup.sh"
-alias zrc="vim /home/john/.zshrc"
-alias szrc="source /home/john/.zshrc"
-alias vrc="vim /home/john/.config/nvim/init.lua"
+alias practice="cd $HOME/repository/Practice/"
+alias top100="cd $HOME/repository/Practice/C/Mastery/top100/"
+alias repo="cd $HOME/repository"
+alias react="cd $HOME/repository/Practice/C/React/tutorial/my-app/"
+#alias home="cd $HOME/"
+alias setup="$HOME/.config/setup.sh"
+alias zrc="vim $HOME/.zshrc"
+alias szrc="source $HOME/.zshrc"
+alias vrc="vim $HOME/.config/nvim/init.lua"
 alias tut="google-chrome https://legacy.reactjs.org/tutorial/tutorial.html"
-alias structures="vim /home/john/repository/Practice/C/Mastery/structures.c"
+alias structures="vim $HOME/repository/Practice/C/Mastery/structures.c"
 #TODO: create a notes file
 #alias notes
 alias ohmyzsh="vim ~/.oh-my-zsh"
-alias updatenvim="/home/john/.config/update_nvim.sh"
+alias updatenvim="$HOME/.config/update_nvim.sh"
 
 alias ll="ls -alF"
 alias la="ls -A"
