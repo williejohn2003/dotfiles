@@ -56,12 +56,12 @@ install_zsh()
 	which zsh;
 	)
 
-	printf "getting zshrc...\n";
-	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
-
   if command -v zsh &>/dev/null; then
     printf "installing ohmyzsh...\n";
     yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+
+	printf "getting zshrc...\n";
+	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
 
     printf "\nZsh install complete!\n";
 
