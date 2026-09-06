@@ -61,7 +61,7 @@ install_zsh()
 
   if command -v zsh &>/dev/null; then
     printf "installing ohmyzsh...\n";
-    yes | sh -c "$(curl -fsSLo https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+    yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
 
     printf "\nZsh install complete!\n";
 
