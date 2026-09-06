@@ -4,6 +4,7 @@ config_dir="$HOME/.config"
 nvim_dir="$HOME/.config/nvim"
 apps_dir="$HOME/apps"
 neovim_repo="$HOME/apps/neovim"
+ranger_dir="$HOME/.config/ranger"
 
 # TODO: handle errors manually
 # TODO: get ranger config files
@@ -25,6 +26,12 @@ install_prereqs()
 # https://github.com/rizsotto/Bear
 	printf "installing prerequisites...\n";
 	sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
+}
+
+ranger_config()
+{
+  ranger --copy-config=all
+  wget -O "$ranger_dir"/rc.conf ;
 }
 
 

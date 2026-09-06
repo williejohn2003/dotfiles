@@ -49,6 +49,9 @@ ZSH_THEME="half-life"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
+# setting the environment variable so this file isn't loaded twice.
+export RANGER_LOAD_DEFAULT_RC=false
+
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
