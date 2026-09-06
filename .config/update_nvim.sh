@@ -28,7 +28,10 @@ set -e
 #fi
 
 # ask user if they want to continue or abort install
-if [[ "$1" != "y" || "$1" != "Y" ]]; then
+case $1 in
+[Yy])
+: ;;
+*)
   read -rp "initiate clean build and install of latest release of NeoVIM (Y/N): " ANS;
 
   # continue or abort install
@@ -41,7 +44,8 @@ if [[ "$1" != "y" || "$1" != "Y" ]]; then
       exit 0;
       ;;
   esac
-fi
+  ;;
+esac
 
 # change directory to neovim repo
 if [[ -e "$NVIM_PATH" ]]; then
