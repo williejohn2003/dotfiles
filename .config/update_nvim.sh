@@ -41,33 +41,39 @@ case "$ANS" in
     ;;
 esac
 
-## change directory to neovim repo
-#cd "$NVIM_PATH"
-#
-## remove all previous nvim files and executable for a clean install
-#make distclean
-#echo "$RUN_TIME_NVIM"
-#sudo rm -rf "$RUN_TIME_NVIM"
-#sudo rm -rf "$NVIM_APP"
-#
-## pull the lastest from stable branch
-#git checkout master
-#git pull
-#git checkout "$(git describe --tags "$(git rev-list --tags --max-count=1)")"
-#
-## build release version of latest stable branch
-#make CMAKE_BUILD_TYPE=RelWithDebInfo
-#
-## installing clean version of latest stable NVIM
-#sudo make install
+# change directory to neovim repo
+if [[ -e "$NVIM_PATH" ]]; then
+  cd "$NVIM_PATH"
+  
+  # remove all previous nvim files and executable for a clean install
+  make distclean
+  echo "$RUN_TIME_NVIM"
+  sudo rm -rf "$RUN_TIME_NVIM"
+  sudo rm -rf "$NVIM_APP"
+  
+  # pull the lastest from stable branch
+  git checkout master
+  git pull
+  git checkout "$(git describe --tags "$(git rev-list --tags --max-count=1)")"
+  
+  # build release version of latest stable branch
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  
+  # installing clean version of latest stable NVIM
+  sudo make install
+  
+  # print install completion message and neovim version
+  printf "\n";
+  printf "\n";
+  printf "====================================================================\n";
+  printf "NVIM install complete!\n";
+  nvim --version
+  printf "====================================================================\n";
 
-# print install completion message and neovim version
-printf "\n";
-printf "\n";
-printf "====================================================================\n";
-printf "NVIM install complete!\n";
-nvim --version
-printf "====================================================================\n";
+else 
+	printf "nvim repo not found at: $NVIM_PATH\n";
+fi
+
 
 exit 0
 
