@@ -28,7 +28,7 @@ set -e
 #fi
 
 # ask user if they want to continue or abort install
-if [[ "$1" == "y" || "$1" == "Y" ]]; then
+if [[ "$1" != "y" || "$1" != "Y" ]]; then
   read -rp "initiate clean build and install of latest release of NeoVIM (Y/N): " ANS;
 
   # continue or abort install
