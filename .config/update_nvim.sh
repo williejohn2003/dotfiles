@@ -37,7 +37,7 @@ case "$ANS" in
     ;;
   *)
     printf "aborting install..\n";
-    exit 1
+    exit 0;
     ;;
 esac
 
