@@ -59,9 +59,9 @@ install_zsh()
 	printf "getting zshrc...\n";
 	wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
 
-	if command -v zsh &>/dev/null; then
-		printf "installing ohmyzsh...\n";
-		sh -c "$(curl -fsSLo https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+  if command -v zsh &>/dev/null; then
+    printf "installing ohmyzsh...\n";
+    yes | sh -c "$(curl -fsSLo https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
 
     printf "\nZsh install complete!\n";
 
@@ -127,7 +127,7 @@ install_nvim()
 	printf "installing nvim...\n";
 	(
 	wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
-	bash "$config_dir"/update_nvim.sh;
+	bash "$config_dir"/update_nvim.sh $1;
 	)
 
 	printf "installing nvim plug packages...\n";
@@ -145,8 +145,8 @@ install_all()
 	install_plug;
 	install_nvim;
 
-	printf "full install complete!\n";
-	printf "close and repoen a new terminal.\n";
+	printf "\nfull install complete!\n";
+	printf "\nclose and repoen a new terminal.\n\n";
 }
 
 
@@ -173,7 +173,7 @@ main()
       ;;
     2) install_zsh;
       ;;
-    3) install_nvim;
+    3) y install_nvim;
       ;;
     4) install_nvim_config;
       ;;
