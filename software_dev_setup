@@ -6,9 +6,7 @@ apps_dir="$HOME/apps"
 neovim_repo="$HOME/apps/neovim"
 ranger_dir="$HOME/.config/ranger"
 
-# TODO: update names for wget
-# catch all errors
-set -e
+#set -e
 
 
 ###############################################################################
@@ -48,13 +46,15 @@ install_zsh()
 
   if command -v zsh &>/dev/null; then
     printf "installing ohmyzsh...\n";
-    yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1;
+
+    printf "making Zsh the default shell...\n";
+    chsh -s $(command -v zsh) || exit 1;
 
     printf "\nZsh install complete!\n";
-
-    #zsh prompts for default shell during installation
-    #printf "making Zsh the default shell...\n";
-    #chsh -s $(which zsh);
+ 
+    printf "\nswitching to Zsh shell...\n";
+    zsh || exit 1;
 
   else
     printf "Zsh install failed!\n";
@@ -70,7 +70,7 @@ install_plug()
   printf "installing vim.plug...\n";
   curl -fLo "${XDG_DATA_HOME:-$HOME/.config}/nvim/autoload/plug.vim" \
     --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim || exit 1;
 
   printf "\nplug install complete!\n";
 }
@@ -88,20 +88,20 @@ install_nvim()
   # if repo exists, remove for clean clone
   if [[ -e "$neovim_repo" ]]; then
     printf "removing old nvim repo...\n";
-    rm -rf "$neovim_repo";
+    rm -rf "$neovim_repo" || exit 1;
   fi
   printf "getting nvim repo...\n";
-  git clone https://github.com/neovim/neovim.git "$neovim_repo";
+  git clone https://github.com/neovim/neovim.git "$neovim_repo" || exit 1;
 
 
   printf "installing nvim...\n";
   (
-    wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh;
-    bash "$config_dir"/update_nvim.sh "$1";
+    wget -O "$config_dir"/update_nvim.sh https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/update_nvim.sh || exit 1;
+    bash "$config_dir"/update_nvim.sh "$1" || exit 1;
   )
 
   printf "installing nvim plug packages...\n";
-  nvim +'PlugInstall' -c 'qall'
+  nvim +'PlugInstall' -c 'qall' || exit 1;
 }
 
 
