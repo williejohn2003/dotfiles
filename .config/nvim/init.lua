@@ -221,11 +221,11 @@ vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { no
 -- Jump to references
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 
--- Jump to declaration
-vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = true, silent = true })
+-- Jump to declaration - NOTE: not useful in C, use gd instead
+--vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = true, silent = true })
 
--- Jump to implementation
-vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = true, silent = true })
+-- Jump to implementation - NOTE: not useful in C, use gd instead
+--vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap = true, silent = true })
 
 -- Hover for symbol information
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
@@ -270,6 +270,8 @@ vim.api.nvim_set_keymap('n', 'ff', '<cmd>Telescope find_files<CR>', { noremap = 
 vim.api.nvim_set_keymap('n', 'fg', '<cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fb', '<cmd>Telescope file_browser<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fh', '<cmd>Telescope help_tags<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'fd', '<cmd>Telescope lsp_document_symbols symbols=function<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'fl', '<cmd>Telescope lsp_document_symbols<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'fc', '<cmd>Telescope colorscheme enable_preview=true previewer=true<CR>', { noremap = true, silent = true })
 --noremap <leader>ff <cmd>Telescope find_files<cr>
 --noremap <leader>fg <cmd>Telescope live_grep<cr>
