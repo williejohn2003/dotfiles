@@ -46,7 +46,7 @@ install_zsh()
 
   if command -v zsh &>/dev/null; then
     printf "installing ohmyzsh...\n";
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1;
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc || exit 1;
 
     printf "making Zsh the default shell...\n";
     chsh -s $(command -v zsh) || exit 1;
@@ -111,8 +111,8 @@ install_all()
   install_prereqs;
   install_ranger_config;
   install_nvim_config;
-  install_zsh;
   install_zsh_config;
+  install_zsh;
   install_plug;
   install_nvim y;
 
@@ -146,9 +146,6 @@ install_zsh_config()
 {
   printf "installing zshrc...\n";
   wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc || exit 1;
-
-  printf "sourcing zshrc...\n";
-  . $HOME/.zshrc || exit 1;
 
   printf "\n.zshrc install complete!\n";
 }
