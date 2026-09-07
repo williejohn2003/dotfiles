@@ -135,7 +135,7 @@ install_ranger_config()
   fi
 
   ranger --copy-config=all
-  wget -O "$ranger_dir"/rc.conf https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/ranger/rc.conf;
+  wget -O "$ranger_dir"/rc.conf https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/ranger/rc.conf || exit 1;
 
   printf "\nranger config install complete!\n";
 }
@@ -145,7 +145,10 @@ install_ranger_config()
 install_zsh_config()
 {
   printf "installing zshrc...\n";
-  wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc;
+  wget -O "$HOME"/.zshrc https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.zshrc || exit 1;
+
+  printf "sourcing zshrc...\n";
+  . $HOME/.zshrc || exit 1;
 
   printf "\n.zshrc install complete!\n";
 }
@@ -162,7 +165,7 @@ install_nvim_config()
 
   # get nvim config file
   printf "getting nvim.init...\n";
-  wget -O "$nvim_dir"/init.lua https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/nvim/init.lua;
+  wget -O "$nvim_dir"/init.lua https://raw.githubusercontent.com/williejohn2003/dotfiles/refs/heads/main/.config/nvim/init.lua || exit 1;
 
   printf "\nnvim.init install complete!\n";
 }
