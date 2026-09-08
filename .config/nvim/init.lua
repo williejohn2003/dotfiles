@@ -132,6 +132,14 @@ vim.g.ctrlp_use_caching = 0
 -------------------------------------------------------------------------------
 -- space to tabs for Makefile
 
+-- open header file view
+vim.keymap.set("n", "<leader>>h", function()
+  local file = vim.fn.expand("%:p")
+  local header = file:gsub("%.c$", ".h")
+  vim.cmd("leftabove vsplit " .. vim.fn.fnameescape(header))
+  vim.cmd("vertical resize 80")
+end, { desc = "Open matching header" })
+
 --toggle colorscheme
 local current = "bvemu"
 vim.keymap.set("n", "<leader>c", function()
