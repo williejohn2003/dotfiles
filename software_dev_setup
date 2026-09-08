@@ -25,7 +25,10 @@ install_prereqs()
   sudo apt -y update;
 
   printf "installing packages...\n";
-  sudo apt -y install clangd bear python3 ripgrep nodejs npm cmake make ranger build-essential;
+  sudo apt -y install clangd bear python3 1ripgrep nodejs npm cmake make ranger build-essential neofetch htop;
+
+  python3 -m venv ~/.venvs/nvim
+  $HOME/.venvs/nvim/bin/pip install pynvim
 
   printf "\nPrerequisites install complete!\n";
 }

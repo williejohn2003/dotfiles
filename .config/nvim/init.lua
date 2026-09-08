@@ -128,9 +128,41 @@ vim.g.netrw_winsize = 25
 
 vim.g.ctrlp_use_caching = 0
 
+-- use pynvim
+vim.g.python3_host_prog = vim.fn.expand("~/.venvs/nvim/bin/python")
+
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -- space to tabs for Makefile
+
+-- intended for WSL ONLY
+-- uncomment to use
+vim.g.clipboard = {
+  name = "WslClipboard",
+  copy = {
+    ["+"] = "/mnt/c/Windows/System32/clip.exe",
+    ["*"] = "/mnt/c/Windows/System32/clip.exe",
+  },
+  paste = {
+    ["+"] = {
+      "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+      "-NoLogo",
+      "-NoProfile",
+      "-Command",
+      "Get-Clipboard -Raw",
+    },
+    ["*"] = {
+      "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+      "-NoLogo",
+      "-NoProfile",
+      "-Command",
+      "Get-Clipboard -Raw",
+    },
+  },
+  cache_enabled = 0,
+}
+
+vim.opt.clipboard = "unnamedplus"
 
 -- open header file view
 vim.keymap.set("n", "<leader>>h", function()
