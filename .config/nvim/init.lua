@@ -12,7 +12,7 @@ vim.opt.wrap=false
 vim.opt.smartcase=true
 vim.opt.swapfile=false
 vim.opt.backup=false
-vim.opt.undodir="$HOME/.config/nvim/undodir"
+vim.opt.undodir="~/.config/nvim/undodir"
 vim.opt.undofile=true
 vim.opt.incsearch= true
 vim.opt.encoding="utf-8"
@@ -162,7 +162,22 @@ vim.g.python3_host_prog = vim.fn.expand("~/.venvs/nvim/bin/python")
 --  cache_enabled = 0,
 --}
 
-vim.opt.clipboard = "unnamedplus"
+--uncomment to enable copy and paste usage with yank
+--vim.opt.clipboard = "unnamedplus"
+--uncomment to enable copy and paste usage with mouse right click only
+--vim.opt.clipboard = ""
+
+-- uncomment to enable clipboard toggle on/off
+--toggle clipboard
+--local current = ""
+--vim.keymap.set("n", "<leader>x", function()
+--  if current ==  "" then
+--    current = "unnamedplus"
+--  else
+--    current = ""
+--  end
+--  vim.opt.clipboard = (current)
+--end, {desc = "toggle clipboard"})
 
 -- open header file view
 vim.keymap.set("n", "<leader>>h", function()
@@ -278,7 +293,7 @@ vim.keymap.set('n', '<leader>o', '<C-o>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>i', '<C-i>', { noremap = true, silent = true })
 
 
---let g:coc_config_home = '$HOME/.config/coc/'
+--let g:coc_config_home = '~/.config/coc/'
 --
 --"-------------------------------------------------------------
 --"COC Commands
