@@ -133,6 +133,31 @@ vim.g.python3_host_prog = vim.fn.expand("~/.venvs/nvim/bin/python")
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+
+--- C function format modifiction - line up parameters on next line
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "c",
+  callback = function()
+    vim.opt_local.cindent = true
+
+    vim.opt_local.indentexpr = "CIndent()"
+
+    vim.cmd([[
+    function! CIndent() abort
+    let l:base = cindent(v:lnum)
+
+    if getline(v:lnum - 1) =~ '([^)]*$'
+      let l:line = getline(v:lnum - 1)
+      let l:col = match(l:line, '(') + 1
+      return l:col
+      endif
+
+      return l:base
+      endfunction
+      ]])
+    end,
+  })
+
 -- space to tabs for Makefile
 
 -- intended for WSL ONLY

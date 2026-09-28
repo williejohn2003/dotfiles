@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+source /etc/os-release
+if [[ "$ID" == rocky ]]; then
+PM="dnf"
+else
+PM="apt"
+fi
+
 config_dir="$HOME/.config"
 nvim_dir="$HOME/.config/nvim"
 apps_dir="$HOME/apps"
@@ -31,7 +38,7 @@ install_prereqs()
   $HOME/.venvs/nvim/bin/pip install pynvim
 
   printf "\nPrerequisites install complete!\n";
-}
+
 
 
 ###############################################################################
