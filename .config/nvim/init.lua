@@ -145,12 +145,17 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.cmd([[
     function! CIndent() abort
     let l:base = cindent(v:lnum)
+    let l:line = getline(v:lnum - 1)
 
-    if getline(v:lnum - 1) =~ '([^)]*$'
-      let l:line = getline(v:lnum - 1)
-      let l:col = match(l:line, '(') + 1
-      return l:col
-      endif
+    if l:line =~ '([^)]*$'
+      let l:col = match(l:line, '(')
+
+      if getline(v:lnum) =~ '^\s*('
+        return l:col
+        endif
+
+        return l:col+1
+        endif
 
       return l:base
       endfunction
