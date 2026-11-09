@@ -15,6 +15,26 @@ ranger_dir="$HOME/.config/ranger"
 
 #set -e
 
+#TODO: add the following
+#
+# nvm install for node and npm for bash completion, clangd, bash-language-server
+#
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+#source ~/.bashrc
+#nvm install --lts
+#nvm use --lts
+#nvm alias default 'lts/*
+
+#TODO: update lua.init
+#
+#vim.lsp.config("bashls", {
+#  cmd = { "bash-language-server", "start" },
+#  filetypes = { "sh", "bash" },
+#})
+#
+#vim.lsp.enable("bashls")
+#
+
 
 ###############################################################################
 #                                PACKAGES
@@ -38,6 +58,7 @@ install_prereqs()
   $HOME/.venvs/nvim/bin/pip install pynvim
 
   printf "\nPrerequisites install complete!\n";
+}
 
 
 
